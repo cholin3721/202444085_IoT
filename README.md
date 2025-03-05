@@ -1,1 +1,2 @@
-This repository is for summarize and memo about IoT class -By 202444085-
+This repository is for summarize and memo about IoT class
+-202444085-
