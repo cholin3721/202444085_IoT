@@ -1,14 +1,12 @@
-// C++ code
-//
 #define TRIG 13 // TRIG 핀
 #define ECHO 12 // ECHO 핀
-#define led_g 8
-int led_r = 7;  // 세미콜론 추가
+#define led_g 8 // 녹색 LED 핀 (기호 상수로 표현)
+int led_r = 7;  // 빨간색 LED 핀
 
-void setup() 
+void setup() // 아두이노에서 딱 한 번 실행되는 함수, 이후 loop 함수가 무한 반복됨
 {
-  Serial.begin(9600);
-  pinMode(led_g, OUTPUT);
+  Serial.begin(9600);  // 아두이노와 PC의 통신 속도 설정 (클수록 빠르고 불안정, 작을수록 느리고 안정적)
+  pinMode(led_g, OUTPUT); // 핀을 출력 모드로 설정
   pinMode(led_r, OUTPUT);
   pinMode(TRIG, OUTPUT);
   pinMode(ECHO, INPUT);
@@ -17,29 +15,30 @@ void setup()
 void loop()
 {
   long duration, distance;
-  digitalWrite(TRIG, LOW);
-  delayMicroseconds(2);
+  
+  digitalWrite(TRIG, LOW); // 장치가 루프 도중 잘못될 가능성이 있으니 low로 초기화 시킴
+  delayMicroseconds(2); // 2 마이크로초 동안 LOW 유지
+  
   digitalWrite(TRIG, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(10); // 10 마이크로초 동안 HIGH 유지하여 초음파 발사
   digitalWrite(TRIG, LOW);
   
-  duration = pulseIn(ECHO, HIGH);
+  duration = pulseIn(ECHO, HIGH); // ECHO 단자가 HIGH 상태였던 시간 측정
   
-  distance = duration / 58.2;
+  distance = duration * 0.017; // 거리(cm) 계산 (duration / 58.2와 동일한 결과)
   
   if(distance > 100) {
-    digitalWrite(led_r, HIGH);
-    digitalWrite(led_g, LOW);
+    digitalWrite(led_r, HIGH);  // 100cm 이상이면 빨간색 LED ON
+    digitalWrite(led_g, LOW);   // 녹색 LED OFF
   } else {
-    digitalWrite(led_g, HIGH);
-    digitalWrite(led_r, LOW);
+    digitalWrite(led_g, HIGH);  // 100cm 이하이면 녹색 LED ON
+    digitalWrite(led_r, LOW);   // 빨간색 LED OFF
   }
   
-  Serial.println(duration );
+  Serial.println(duration);
   Serial.print("\nDistance : ");
-  Serial.print(distance);  // 세미콜론 추가
-  Serial.println(" Cm");   // 대소문자 수정
-  
-  delay(1000);
-   // wait for 1000 millisecond(s)
+  Serial.print(distance);  
+  Serial.println(" cm"); // 대소문자 수정
+
+  delay(1000); // 1000ms(1초) 대기
 }
