@@ -1,0 +1,45 @@
+// C++ code
+//
+#define TRIG 13 // TRIG 핀
+#define ECHO 12 // ECHO 핀
+#define led_g 8
+int led_r = 7;  // 세미콜론 추가
+
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode(led_g, OUTPUT);
+  pinMode(led_r, OUTPUT);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop()
+{
+  long duration, distance;
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  
+  duration = pulseIn(ECHO, HIGH);
+  
+  distance = duration / 58.2;
+  
+  if(distance > 100) {
+    digitalWrite(led_r, HIGH);
+    digitalWrite(led_g, LOW);
+  } else {
+    digitalWrite(led_g, HIGH);
+    digitalWrite(led_r, LOW);
+  }
+  
+  Serial.println(duration );
+  Serial.print("\nDistance : ");
+  Serial.print(distance);  // 세미콜론 추가
+  Serial.println(" Cm");   // 대소문자 수정
+  
+  delay(1000);
+   // wait for 1000 millisecond(s)
+}
