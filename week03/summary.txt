@@ -1,0 +1,26 @@
+influxDB 
+시계열 데이터 베이스 << 시간 순으로 흘러가는 변화하는 추이들을 살펴보기 위한 데이터들을 모아놓는 것이라 추정, 효과적으로 저장하고 관리하는데 최적화
+tag 기반으로 데이터를 다루기 때문에 검색 속도가 빠르고, insert(삽입) 및 select(검색)이 빠르다.
+timestamp(시간 정보)가 저장된다. 센서 데이터, 주식 가격, 서버 로그, 모니터링에 특화
+sql같이 select * from tbl where (조건식) 지원
+
+influxDB 주요 개념
+Measurement >> 테이블이랑 비슷한 개념임
+Tag : 빠른 검색을 위한 메타 데이터 ex) "device =arduino"
+Field : 저장할 데이터의 값(의미가 있는 데이터) (temperature = 25.3)
+timestamp : 데이터가 기록된 시간
+
+mySQL과 비교하면 Mysql은 쇼핑몰이나 회원 가입, 학생 정보등을 저장하기 위한 데이터 베이스, influxDB는 주로 센서 데이터나 시간별로 변화하는 그런 센서 데이터나 주식가격등을
+저장하기 적합하다.
+
+CLI = Character Line Interface 명령행 기준으로
+GUI grapic User Interface로 발전하기 전
+
+리눅스는 탭 쓰는 것을 생활화 하여야 한다.
+
+파워쉘 명령어 해석
+Expand_Archive << 파워쉘 압축 푸는 명령어
+.\influxdb2-2.7.11-windows.zip  << 이거를
+-DestiantionPath 'C:\Program Files\InfluxData\' 여기에다 풀어라
+mv : 이름 변경(move)
+mv 'C:\Program Files\InfluxData\influxdb2-2.7.11' 'C:\Program Files\InfluxData\influxdb' 를 변경해라
