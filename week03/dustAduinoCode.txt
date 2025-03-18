@@ -1,0 +1,29 @@
+int vo = A0;       // 아날로그 입력 핀
+int V_led = 12;     // LED 출력 핀
+
+float Vo_value = 0;  // 변수 이름을 Vo_value로 통일
+float Voltage = 0;
+float dustDensity = 0;
+
+void setup() {
+  Serial.begin(9600);    // 시리얼 통신 시작
+  pinMode(V_led, OUTPUT); // V_led 핀을 출력 모드로 설정
+  pinMode(vo, INPUT);     // vo 핀을 입력 모드로 설정
+}
+
+void loop() {
+  digitalWrite(V_led, LOW);  // LED 켜기
+  delayMicroseconds(280);     // 280마이크로초 지연
+  Vo_value = analogRead(vo);  // 아날로그 값 읽기
+  delayMicroseconds(40);      // 40마이크로초 지연
+  digitalWrite(V_led, HIGH);  // LED 끄기
+  delayMicroseconds(9680);    // 9680마이크로초 지연
+
+  Voltage = Vo_value * 5.0 / 1023.0;   // 아날로그 값을 전압으로 변환
+  dustDensity = (Voltage - 0.5) / 0.005; // 먼지 농도 계산
+
+  Serial.print("dust=");   
+  Serial.println(dustDensity);  // 먼지 농도 출력
+
+  delay(1000);  // 1초 대기
+}
