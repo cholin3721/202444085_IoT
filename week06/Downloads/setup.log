@@ -1,0 +1,71 @@
+2025/04/08 10:09:49 Starting cygwin install, version 2.932
+2025/04/08 10:09:49 User has backup/restore rights
+2025/04/08 10:09:49 User has symlink creation right
+2025/04/08 10:09:49 Current Directory: C:\Users\khg\Downloads\cygwinPD
+2025/04/08 10:09:50 source: network install
+2025/04/08 10:09:51 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:10:01 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:10:26 source: network install
+2025/04/08 10:11:08 source: network install
+2025/04/08 10:11:46 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:11:50 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:03 mbox : Are you sure you want to exit setup? Any current download or installation will be aborted.
+2025/04/08 10:12:04 Ending cygwin install
+2025/04/08 10:12:21 Starting cygwin install, version 2.932
+2025/04/08 10:12:21 User has backup/restore rights
+2025/04/08 10:12:21 User has symlink creation right
+2025/04/08 10:12:21 Current Directory: C:\Users\khg\Downloads\cygwinPD
+2025/04/08 10:12:26 source: network install
+2025/04/08 10:12:27 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:30 mbox : Are you sure you want to exit setup? Any current download or installation will be aborted.
+2025/04/08 10:12:34 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:37 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:38 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:38 mbox : Target CPU mismatch
+
+You're trying to install a 64 bit version of Cygwin into a directory containing a 32 bit version of Cygwin.  Continuing to do so would break the existing installation.
+
+Either run setup-x86.exe to update your existing 32 bit installation of Cygwin, or choose another directory for your 64 bit installation.
+2025/04/08 10:12:39 mbox : Are you sure you want to exit setup? Any current download or installation will be aborted.
+2025/04/08 10:12:40 Ending cygwin install
+2025/04/08 13:41:30 Starting cygwin install, version 2.932
+2025/04/08 13:41:30 User has backup/restore rights
+2025/04/08 13:41:30 User has symlink creation right
+2025/04/08 13:41:30 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
+2025/04/08 13:41:30 Current Directory: C:\202444085_Assemble\202444085_IoT\week06\Downloads
+2025/04/08 13:42:33 source: network install
+2025/04/08 13:43:23 mbox : Are you sure you want to exit setup? Any current download or installation will be aborted.
+2025/04/08 13:43:25 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
+2025/04/08 13:43:25 Ending cygwin install
