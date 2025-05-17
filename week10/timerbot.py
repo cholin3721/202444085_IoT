@@ -1,0 +1,145 @@
+#!/usr/bin/env python
+# pylint: disable=unused-argument
+# This program is dedicated to the public domain under the CC0 license.
+
+"""
+Simple Bot to send timed Telegram messages.
+
+This Bot uses the Application class to handle the bot and the JobQueue to send
+timed messages.
+
+First, a few handler functions are defined. Then, those functions are passed to
+the Application and registered at their respective places.
+Then, the bot is started and runs until we press Ctrl-C on the command line.
+
+Usage:
+Basic Alarm Bot example, sends a message after a set time.
+Press Ctrl-C on the command line or send a signal to the process to stop the
+bot.
+
+Note:
+To use the JobQueue, you must install PTB via
+`pip install "python-telegram-bot[job-queue]"`
+"""
+
+import logging
+import cv2
+import time
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
+
+# Enable logging
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+
+##EDITING CODE
+def takePhoto():
+    cap = cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    if not cap.isOpened():
+        print("camera open error")
+        return 
+    ret, image=cap.read()
+    if not ret:
+        print("frame read error")
+        return
+    cv2.imshow('CAMERA', image)
+    time.sleep(1)
+    cv2.imwrite("./image.jpg",image)
+    cap.release()
+    cv2.destroyAllWindows()
+  # test.py의 코드를 가지고와서 api의 기능을 추가하려고 추가한듯. 자세한 설명은 test.py 참고고
+
+# Define a few command handlers. These usually take the two arguments update and
+# context.
+# Best practice would be to replace context with an underscore,
+# since context is an unused local variable.
+# This being an example and not having context present confusing beginners,
+# we decided to have it present as context.
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Sends explanation on how to use the bot."""
+    await update.message.reply_text("Hi! Use /set <seconds> to set a timer")
+# async 함수란 비동기 프로그래밍을 위한 함수, await와 함께 사용되며, 반환객체가 코루틴이란 객체
+# 다른 함수와 달리 작업을 잠시 멈췄다고 다시 진행할 수 있는 함수
+# await 키워드란 다른 비동기 함수의 작업이 끝날때까찌 기다리는 키워드
+# asyncio.run() 이런식으로 실행하는 듯?
+# import asyncio
+
+# async def main():
+#     print("비동기 잠자기 시작")
+#     await asyncio.sleep(3)
+#     print("3초 후 다시 실행")
+
+# asyncio.run(main())
+# 이런식으로 실행, await 뒤에 오는 함수또한 async def 여야만 함
+# asyncio를 사용하지 않으면 async 함수는 실행되지 않고, 코루틴 객체만 반환됨
+# 실제 실행을 위해서는 asyncio.run() 또는 await로 감싸줘야 함
+
+async def alarm(context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send the alarm message."""
+    takePhoto()  # /set 몇초를 두고 알람이 울리면 이 기능을 실행하도록 명시
+    job = context.job
+    await context.bot.send_message(job.chat_id, text=f"Beep! {job.data} seconds are over!")
+    await context.bot.sendPhoto(job.chat_id, photo=open("./image.jpg","rb"))
+
+
+def remove_job_if_exists(name: str, context: ContextTypes.DEFAULT_TYPE) -> bool:
+    """Remove job with given name. Returns whether job was removed."""
+    current_jobs = context.job_queue.get_jobs_by_name(name)
+    if not current_jobs:
+        return False
+    for job in current_jobs:
+        job.schedule_removal()
+    return True
+
+
+async def set_timer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Add a job to the queue."""
+    chat_id = update.effective_message.chat_id
+    try:
+        # args[0] should contain the time for the timer in seconds
+        due = float(context.args[0])
+        if due < 0:
+            await update.effective_message.reply_text("Sorry we can not go back to future!")
+            return
+
+        job_removed = remove_job_if_exists(str(chat_id), context)
+        context.job_queue.run_repeating(alarm, due, chat_id=chat_id, name=str(chat_id), data=due)
+
+        text = "Timer successfully set!"
+        if job_removed:
+            text += " Old one was removed."
+        await update.effective_message.reply_text(text)
+
+    except (IndexError, ValueError):
+        await update.effective_message.reply_text("Usage: /set <seconds>")
+
+
+async def unset(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Remove the job if the user changed their mind."""
+    chat_id = update.message.chat_id
+    job_removed = remove_job_if_exists(str(chat_id), context)
+    text = "Timer successfully cancelled!" if job_removed else "You have no active timer."
+    await update.message.reply_text(text)
+
+
+def main() -> None:
+    """Run bot."""
+    # Create the Application and pass it your bot's token.
+    application = Application.builder().token("1331886552:").build()
+
+    # on different commands - answer in Telegram
+    application.add_handler(CommandHandler(["start", "help"], start))
+    application.add_handler(CommandHandler("set", set_timer))
+    application.add_handler(CommandHandler("unset", unset))
+    # 텔레그램 명령어(예: /start, /set 등)를 처리할 함수들을 핸들러에 등록하는 부분
+    # 명령어가 입력되면 해당 함수가 실행되도록 연결함
+
+    # Run the bot until the user presses Ctrl-C
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
+
+
+if __name__ == "__main__":
+    main()
