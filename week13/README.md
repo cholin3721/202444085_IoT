@@ -136,12 +136,17 @@ CFP 구간에서 충돌 없이 데이터를 보낼 수 있도록 예약된 시�
 
 슬립 기능과 결합하여 에너지 효율 향상
 
-📌 요약 정리표
+📌 요약 정리
 Wi-Fi	IEEE 802.11, CSMA/CA, RTS/CTS, BSS/ESS
+
 CSMA/CA	충돌 회피, 백오프 시간, 랜덤 대기
+
 ZigBee 계층	PHY, MAC, NWK, APS, APL
+
 PHY 계층	DSSS 방식, 2.4GHz 포함 27채널
+
 MAC 통신방식	Non-Beacon(간단, 슬립 어려움), Beacon(복잡, 슬립 쉬움)
+
 슈퍼프레임	16슬롯, CAP/CFP/GTS 포함, 비콘으로 시작
 프레임 종류	Beacon, Data, ACK, MAC Command
 주소 체계	16비트 Short, 64비트 Extended, MAC 주소: PAN ID 포함
